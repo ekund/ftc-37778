@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Loose Screws #37778 - FTC Robotics</title>
+    <!-- Fun Google Fonts fitting a 7th grader's cool website -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --soft-blue: #60a5fa;
+            --light-blue-bg: #e0f2fe;
+            --main-purple: #9333ea;
+            --soft-purple: #c084fc;
+            --light-purple-bg: #f3e8ff;
+            --accent-pink: #f472b6;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --border-radius: 22px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 50%, #dbeafe 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Fun Doodled Header */
+        header {
+            background: linear-gradient(120deg, #3b82f6, #a855f7);
+            color: white;
+            padding: 2.5rem 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 6px dashed #ffffff;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "🔩 🤖 ✨ ⚙️ ⚡";
+            position: absolute;
+            top: 8px;
+            font-size: 1.4rem;
+            opacity: 0.6;
+            letter-spacing: 25px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .team-logo {
+            width: 190px;
+            height: 190px;
+            object-fit: contain;
+            background: white;
+            border-radius: 22px;
+            padding: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            border: 4px solid #c084fc;
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+        }
+
+        .team-logo:hover {
+            transform: rotate(4deg) scale(1.05);
+        }
+
+        h1.team-title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            margin-top: 5px;
+        }
+
+        .team-badge {
+            display: inline-block;
+            background: #ffffff;
+            color: #7c3aed;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 999px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            border: 2px solid #a855f7;
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            font-weight: 700;
+            opacity: 0.95;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 16px;
+            border-radius: 12px;
+            margin-top: 4px;
+        }
+
+        /* Main Container */
+        .page-content {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-family: 'Fredoka', cursive;
+            text-align: center;
+            font-size: 2.1rem;
+            color: #1e3a8a;
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 20px;
+        }
+
+        .section-title span {
+            color: #9333ea;
+        }
+
+        .title-wrapper {
+            text-align: center;
+        }
+
+        /* Season Info Section */
+        .season-card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+            border: 3px solid #c084fc;
+            border-radius: var(--border-radius);
+            padding: 26px;
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.1);
+            position: relative;
+        }
+
+        .season-tag {
+            background: linear-gradient(90deg, #3b82f6, #9333ea);
+            color: white;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .season-card h3 {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.7rem;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .season-card p {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .season-fun-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        .fact-box {
+            background: #eff6ff;
+            border-left: 5px solid #3b82f6;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.98rem;
+        }
+
+        .fact-box strong {
+            color: #1d4ed8;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 22px 18px;
+            text-align: center;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+            border: 3px solid #bfdbfe;
+            transition: all 0.25s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .member-card:hover {
+            transform: translateY(-6px);
+            border-color: #a855f7;
+            box-shadow: 0 14px 28px rgba(168, 85, 247, 0.2);
+        }
+
+        .member-photo-frame {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border: 4px solid #9333ea;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: #f1f5f9;
+        }
+
+        .member-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 12%;
+            display: block;
+        }
+
+        .member-card h3 {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.6rem;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+        }
+
+        .member-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .role-chip {
+            background: #ede9fe;
+            color: #6b21a8;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #d8b4fe;
+            text-transform: capitalize;
+        }
+
+        .role-chip.builder { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+        .role-chip.coder { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
+        .role-chip.design { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+
+        /* Coaches Section */
+        .coaches-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 3px solid #c084fc;
+            text-align: center;
+        }
+
+        .coaches-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 15px;
+        }
+
+        .coach-badge {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            border: 2px solid #a855f7;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #3b0764;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Photo Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 22px;
+        }
+
+        .gallery-card {
+            background: white;
+            padding: 12px 12px 18px 12px;
+            border-radius: 18px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            border: 3px solid #93c5fd;
+            transition: transform 0.2s;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.02);
+            border-color: #c084fc;
+        }
+
+        .gallery-img-wrap {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .gallery-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-card p {
+            margin-top: 12px;
+            font-weight: 700;
+            color: #334155;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        /* Fun quote banner */
+        .quote-banner {
+            background: linear-gradient(90deg, #9333ea, #2563eb);
+            color: white;
+            padding: 24px;
+            border-radius: 20px;
+            text-align: center;
+            font-family: 'Fredoka', cursive;
+            font-size: 1.4rem;
+            box-shadow: 0 10px 22px rgba(147, 51, 234, 0.25);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            h1.team-title { font-size: 2.1rem; }
+            .team-logo { width: 130px; height: 130px; }
+            .section-title { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with team name, logo, & number -->
+    <header>
+        <div class="header-container">
+            <img src="FTClogo.png" data-filename="ftclogo" alt="The Loose Screws #37778 Logo" class="team-logo"
+                 onerror="this.onerror=null; this.src='https://placehold.co/300x300/e0f2fe/7c3aed?text=The+Loose+Screws+%2337778';">
+            <h1 class="team-title">The Loose Screws</h1>
+            <div class="team-badge">FIRST® Tech Challenge • Team #37778</div>
+            <p class="tagline">🔩 Where bold ideas meet awesome robotics! 🤖</p>
+        </div>
+    </header>
+
+    <div class="page-content">
+
+        <!-- Season Info Section -->
+        <section class="season-card">
+            <div class="season-tag">2026 - 2027 FIRST Season</div>
+            <h3>🌿 Welcome to the FIRST® CANOPY™ & BIOBUZZ™ Season!</h3>
+            <p>
+                Our 2026-2027 challenge is officially here! According to <strong>firstinspires.org</strong>, the new theme is all about 
+                <em>engineering a thriving planet</em> inspired by biological diversity and nature. 
+            </p>
+            <p>
+                In <strong>BIOBUZZ™ presented by RTX</strong>, teams use creative engineering, autonomous coding, and teamwork to solve exciting nature-inspired challenges on the competition field!
+            </p>
+            <div class="season-fun-facts">
+                <div class="fact-box">
+                    <strong>🐝 BIOBUZZ Game</strong>
+                    FTC robots take flight into nature's biodiversity and buzzing challenges!
+                </div>
+                <div class="fact-box">
+                    <strong>🤝 Gracious Professionalism®</strong>
+                    Competing like crazy while cheering on and helping every other team!
+                </div>
+                <div class="fact-box">
+                    <strong>🚀 Team Goals</strong>
+                    Reliable drivetrain, smooth intake, super cool autonomous points, and high spirits!
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members Section -->
+        <section>
+            <div class="title-wrapper">
+                <h2 class="section-title">Meet <span>The Crew</span></h2>
+            </div>
+            
+            <div class="team-grid">
+                
+                <!-- Bina -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="BinaFTC.JPG" data-filename="binaftc" alt="Bina - Builder, Cricut"
+                             onerror="if(this.src.endsWith('BinaFTC.JPG')){this.src='BinaFTC.jpg';}else{this.onerror=null;this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Bina+%F0%9F%94%A8';}">
+                    </div>
+                    <h3>Bina</h3>
+                    <div class="member-roles">
+                        <span class="role-chip builder">🔨 Builder</span>
+                        <span class="role-chip design">✂️ Cricut Pro</span>
+                    </div>
+                </div>
+
+                <!-- Atara -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="ataraftc.jpg" data-filename="ataraftc" alt="Atara - Designer, Cricut, Portfolio"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/f3e8ff/6b21a8?text=Atara+%F0%9F%8E%A8';">
+                    </div>
+                    <h3>Atara</h3>
+                    <div class="member-roles">
+                        <span class="role-chip design">🎨 Designer</span>
+                        <span class="role-chip design">✂️ Cricut</span>
+                        <span class="role-chip">📓 Portfolio</span>
+                    </div>
+                </div>
+
+                <!-- Rochel -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="rocketFTC.jpg" data-filename="rocketftc" alt="Rochel - Coder"
+                             onerror="if(this.src.endsWith('rocketFTC.jpg')){this.src='rocketFTC.heic';}else{this.onerror=null;this.src='https://placehold.co/300x300/fce7f3/9d174d?text=Rochel+%F0%9F%92%BB';}">
+                    </div>
+                    <h3>Rochel</h3>
+                    <div class="member-roles">
+                        <span class="role-chip coder">💻 Lead Coder</span>
+                    </div>
+                </div>
+
+                <!-- Aliza -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="aliza_ftc.jpg" data-filename="aliza_ftc" alt="Aliza - Builder, Website"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Aliza+%F0%9F%8C%90';">
+                    </div>
+                    <h3>Aliza</h3>
+                    <div class="member-roles">
+                        <span class="role-chip builder">🔨 Builder</span>
+                        <span class="role-chip">🌐 Website Maker</span>
+                    </div>
+                </div>
+
+                <!-- Ayala -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="ayalaftc.jpg" data-filename="ayalaftc" alt="Ayala - Builder"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/f3e8ff/6b21a8?text=Ayala+%E2%9A%99%EF%B8%8F';">
+                    </div>
+                    <h3>Ayala</h3>
+                    <div class="member-roles">
+                        <span class="role-chip builder">🔨 Builder</span>
+                        <span class="role-chip">⚙️ Mechanics</span>
+                    </div>
+                </div>
+
+                <!-- Ilana -->
+                <div class="member-card">
+                    <div class="member-photo-frame">
+                        <img src="LanaFTC.png" data-filename="lanaftc" alt="Ilana - Finance and Outreach"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Ilana+%F0%9F%93%A3';">
+                    </div>
+                    <h3>Ilana</h3>
+                    <div class="member-roles">
+                        <span class="role-chip">💰 Team Finance</span>
+                        <span class="role-chip design">📣 Outreach</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Coaches Section -->
+        <section class="coaches-section">
+            <h2 class="section-title">Our Super <span>Coaches</span> 🏆</h2>
+            <p>Huge thank you to our awesome coaches for guiding us, keeping us safe, and making sure our screws stay tight!</p>
+            <div class="coaches-list">
+                <div class="coach-badge">🧢 Moshe Kundin</div>
+                <div class="coach-badge">🌟 Esther Kundin</div>
+                <div class="coach-badge">💡 Tova Sigelman</div>
+            </div>
+        </section>
+
+        <!-- Team Photos Gallery -->
+        <section>
+            <div class="title-wrapper">
+                <h2 class="section-title">Action <span>Photos</span> 📸</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Robot Chassis -->
+                <div class="gallery-card">
+                    <div class="gallery-img-wrap">
+                        <img src="ftcrobot2026.jpg" data-filename="ftcrobot2026" alt="Our FTC Robot Chassis with Mecanum Wheels"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/dbeafe/1e40af?text=2026+FTC+Robot+Chassis+%F0%9F%A4%96';">
+                    </div>
+                    <p>🤖 The 2026 Robot Chassis taking shape with REV Control Hub & Mecanum wheels!</p>
+                </div>
+
+                <!-- Building the Robot -->
+                <div class="gallery-card">
+                    <div class="gallery-img-wrap">
+                        <img src="ftc_team.jpg" data-filename="ftc_team" alt="Team building the robot and sorting parts"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/f3e8ff/6b21a8?text=Team+Building+the+Robot+%F0%9F%9B%A0%EF%B8%8F';">
+                    </div>
+                    <p>🛠️ The team deep in building mode, reading REV assembly guides and sorting gear!</p>
+                </div>
+
+                <!-- Cricut Sweatshirts -->
+                <div class="gallery-card">
+                    <div class="gallery-img-wrap">
+                        <img src="sweatshirtftc.jpg" data-filename="sweatshirtftc" alt="Custom Team Sweatshirt made with Cricut"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/ede9fe/7c3aed?text=Custom+Cricut+Sweatshirt+%F0%9F%92%9C';">
+                    </div>
+                    <p>💜 Rocking our custom lavender team sweatshirt made using our Cricut machine!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote / Cheer banner -->
+        <div class="quote-banner">
+            "We might have a few loose screws, but our robot is bolted down and ready to roll!" 🔩💪
+        </div>
+
+        <footer>
+            <p>Made with 💜 and 💙 by FTC Team #37778 • The Loose Screws • 2026-2027 Season</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
