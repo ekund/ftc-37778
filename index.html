@@ -391,63 +391,15 @@
             .team-logo { width: 130px; height: 130px; }
             .section-title { font-size: 1.7rem; }
         }
-
-        /* One-click Copy/Download Helper Bar */
-        #export-bar {
-            background: #1e293b;
-            color: white;
-            padding: 12px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
-            border-bottom: 3px solid #60a5fa;
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-        }
-        .export-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-weight: 800;
-            cursor: pointer;
-            font-family: 'Nunito', sans-serif;
-            transition: transform 0.15s, background 0.2s;
-        }
-        .export-btn:hover {
-            background: #2563eb;
-            transform: scale(1.04);
-        }
-        .export-btn.purple {
-            background: #9333ea;
-        }
-        .export-btn.purple:hover {
-            background: #7e22ce;
-        }
     </style>
 </head>
 <body>
 
-    <!-- One-click Copy & Download Helper Bar (automatically excluded from downloaded/copied code!) -->
-    <div id="export-bar">
-        <span>✨ <strong>Tools:</strong></span>
-        <label class="export-btn" style="background:#10b981; cursor:pointer;">
-            📂 Load Photos (If Not Showing)
-            <input type="file" multiple accept="image/*,.heic,.HEIC" style="display:none" onchange="loadLocalPhotos(this.files)">
-        </label>
-        <button class="export-btn" onclick="copyCleanHTML(this)">📋 Copy HTML Code</button>
-        <button class="export-btn purple" onclick="downloadCleanHTML()">⬇️ Download index.html</button>
-    </div>
-
     <!-- Header with team name, logo, & number -->
     <header>
         <div class="header-container">
-            <img src="FTClogo.png" alt="The Loose Screws #37778 Logo" class="team-logo">
+            <img src="FTClogo.png" data-filename="ftclogo" alt="The Loose Screws #37778 Logo" class="team-logo"
+                 onerror="this.onerror=null; this.src='https://placehold.co/300x300/e0f2fe/7c3aed?text=The+Loose+Screws+%2337778';">
             <h1 class="team-title">The Loose Screws</h1>
             <div class="team-badge">FIRST® Tech Challenge • Team #37778</div>
             <p class="tagline">🔩 Where bold ideas meet awesome robotics! 🤖</p>
@@ -494,7 +446,8 @@
                 <!-- Bina -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="BinaFTC.jpg" alt="Bina - Builder, Cricut">
+                        <img src="BinaFTC.JPG" data-filename="binaftc" alt="Bina - Builder, Cricut"
+                             onerror="if(this.src.endsWith('BinaFTC.JPG')){this.src='BinaFTC.jpg';}else{this.onerror=null;this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Bina+%F0%9F%94%A8';}">
                     </div>
                     <h3>Bina</h3>
                     <div class="member-roles">
@@ -506,7 +459,8 @@
                 <!-- Atara -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="ataraftc.jpg" alt="Atara - Designer, Cricut, Portfolio">
+                        <img src="ataraftc.jpg" data-filename="ataraftc" alt="Atara - Designer, Cricut, Portfolio"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/f3e8ff/6b21a8?text=Atara+%F0%9F%8E%A8';">
                     </div>
                     <h3>Atara</h3>
                     <div class="member-roles">
@@ -519,7 +473,8 @@
                 <!-- Rochel -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="rocketFTC.jpg" alt="Rochel - Coder">
+                        <img src="rocketFTC.jpg" data-filename="rocketftc" alt="Rochel - Coder"
+                             onerror="if(this.src.endsWith('rocketFTC.jpg')){this.src='rocketFTC.heic';}else{this.onerror=null;this.src='https://placehold.co/300x300/fce7f3/9d174d?text=Rochel+%F0%9F%92%BB';}">
                     </div>
                     <h3>Rochel</h3>
                     <div class="member-roles">
@@ -530,7 +485,8 @@
                 <!-- Aliza -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="aliza_ftc.jpg" alt="Aliza - Builder, Website">
+                        <img src="aliza_ftc.jpg" data-filename="aliza_ftc" alt="Aliza - Builder, Website"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Aliza+%F0%9F%8C%90';">
                     </div>
                     <h3>Aliza</h3>
                     <div class="member-roles">
@@ -542,7 +498,8 @@
                 <!-- Ayala -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="ayalaftc.jpg" alt="Ayala - Builder">
+                        <img src="ayalaftc.jpg" data-filename="ayalaftc" alt="Ayala - Builder"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/f3e8ff/6b21a8?text=Ayala+%E2%9A%99%EF%B8%8F';">
                     </div>
                     <h3>Ayala</h3>
                     <div class="member-roles">
@@ -554,7 +511,8 @@
                 <!-- Ilana -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="LanaFTC.png" alt="Ilana - Finance and Outreach">
+                        <img src="LanaFTC.png" data-filename="lanaftc" alt="Ilana - Finance and Outreach"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Ilana+%F0%9F%93%A3';">
                     </div>
                     <h3>Ilana</h3>
                     <div class="member-roles">
@@ -587,7 +545,8 @@
                 <!-- Bella -->
                 <div class="member-card">
                     <div class="member-photo-frame">
-                        <img src="BellaFTC.jpg" alt="Bella - Team Mentor">
+                        <img src="BellaFTC.jpg" data-filename="bellaftc" alt="Bella - Team Mentor"
+                             onerror="this.onerror=null; this.src='https://placehold.co/300x300/dbeafe/1e40af?text=Bella+%F0%9F%8C%9F';">
                     </div>
                     <h3>Bella</h3>
                     <div class="member-roles">
@@ -607,7 +566,8 @@
                 <!-- Robot Chassis -->
                 <div class="gallery-card">
                     <div class="gallery-img-wrap">
-                        <img src="ftcrobot2026.jpg" alt="Our FTC Robot Chassis with Mecanum Wheels">
+                        <img src="ftcrobot2026.jpg" data-filename="ftcrobot2026" alt="Our FTC Robot Chassis with Mecanum Wheels"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/dbeafe/1e40af?text=2026+FTC+Robot+Chassis+%F0%9F%A4%96';">
                     </div>
                     <p>🤖 The 2026 Robot Chassis taking shape with REV Control Hub & Mecanum wheels!</p>
                 </div>
@@ -615,7 +575,8 @@
                 <!-- Building the Robot -->
                 <div class="gallery-card">
                     <div class="gallery-img-wrap">
-                        <img src="ftc_team.jpg" alt="Team building the robot and sorting parts">
+                        <img src="ftc_team.jpg" data-filename="ftc_team" alt="Team building the robot and sorting parts"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/f3e8ff/6b21a8?text=Team+Building+the+Robot+%F0%9F%9B%A0%EF%B8%8F';">
                     </div>
                     <p>🛠️ The team deep in building mode, reading REV assembly guides and sorting gear!</p>
                 </div>
@@ -623,7 +584,8 @@
                 <!-- Cricut Sweatshirts -->
                 <div class="gallery-card">
                     <div class="gallery-img-wrap">
-                        <img src="sweatshirtftc.jpg" alt="Custom Team Sweatshirt made with Cricut">
+                        <img src="sweatshirtftc.jpg" data-filename="sweatshirtftc" alt="Custom Team Sweatshirt made with Cricut"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/ede9fe/7c3aed?text=Custom+Cricut+Sweatshirt+%F0%9F%92%9C';">
                     </div>
                     <p>💜 Rocking our custom lavender team sweatshirt made using our Cricut machine!</p>
                 </div>
@@ -640,59 +602,6 @@
         </footer>
 
     </div>
-
-    <script id="export-script">
-        function loadLocalPhotos(files) {
-            Array.from(files).forEach(file => {
-                const cleanName = file.name.toLowerCase();
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelectorAll('img').forEach(img => {
-                        const target = (img.getAttribute('src') || '').toLowerCase();
-                        if (cleanName === target) {
-                            img.src = e.target.result;
-                        }
-                    });
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function getCleanHTMLString() {
-            const clone = document.documentElement.cloneNode(true);
-            const bar = clone.querySelector('#export-bar');
-            if (bar) bar.remove();
-            const script = clone.querySelector('#export-script');
-            if (script) script.remove();
-            return '<!DOCTYPE html>\n' + clone.outerHTML;
-        }
-
-        function copyCleanHTML(btn) {
-            const code = getCleanHTMLString();
-            const textarea = document.createElement('textarea');
-            textarea.value = code;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            const originalText = btn.innerText;
-            btn.innerText = '✅ Copied to Clipboard!';
-            setTimeout(() => { btn.innerText = originalText; }, 2500);
-        }
-
-        function downloadCleanHTML() {
-            const code = getCleanHTMLString();
-            const blob = new Blob([code], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'index.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-    </script>
 
 </body>
 </html>
